@@ -9,13 +9,11 @@ module.exports = {
 	    publicPath: 'http://localhost:3000/build'
 	},
 	module: {
-		loaders: [
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				loader: 'babel'
-			}
-		]
+		loaders: [{
+			test: /\.js$/,
+			exclude: /node_modules/,
+			loaders: ['react-hot', 'babel']
+		}]
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),

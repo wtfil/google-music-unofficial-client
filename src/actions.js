@@ -66,3 +66,14 @@ export function loadRecent() {
 		}
 	});
 }
+
+export const LOAD_PLAYLISTS_SUCCESS = 'LOAD_PLAYLISTS_SUCCESS';
+export function loadPlaylists() {
+	return dispatch => request({
+		dispatch, pm,
+		url: 'services/loadplaylists',
+		types: {
+			success: LOAD_PLAYLISTS_SUCCESS
+		}
+	});
+}

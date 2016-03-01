@@ -17,10 +17,11 @@ export function profile(state = DEFAULT_PROFILE, action) {
 }
 
 export function music(state = DEFAULT_MUSIC, action) {
-	console.log(action);
 	switch(action.type) {
 		case actions.LOAD_RADIO_SUCCESS:
 			return {...state, radio: action.data};
+		case actions.LOAD_PLAYLISTS_SUCCESS:
+			return {...state, playlists: action.data.playlist};
 		default:
 			return state;
 	}
