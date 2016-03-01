@@ -1,13 +1,13 @@
 import React from 'react';
-import {Route, IndexRoute} from 'react-router';
+import {Route} from 'react-router';
 
-class App extends React.Component {
-	render() {
-		return <span>yo!</span>;
-	}
-}
+import Login from './containers/Login';
+import Authorization from './containers/Authorization';
 
 export default (
-	<Route path="/" component={App}>
+	<Route>
+		<Route path="/" component={Authorization}>
+		</Route>
+		<Route path="/login" component={Login}></Route>
 	</Route>
 );
