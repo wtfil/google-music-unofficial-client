@@ -1,18 +1,19 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {authorize} from '../actions';
+import Login from './Login'
 
 @connect(state => state)
 export default class Authorization  extends React.Component {
 	static contextTypes = {
 		history: PropTypes.object.isRequired
 	};
-	componentWillMount() {
-		if (!this.props.profile.login) {
-			this.context.history.replaceState(null, '/login');
-		}
+
+	static onEnter(dispatch) {
+		return dispatch(authorize());
 	}
 	render() {
-		const {profile, children} = this.props;
-		return profile.login ? {children} : null;
+		const {profile, children = null} = this.props;
+		return profile.auth ? children : <Login />;
 	}
 }

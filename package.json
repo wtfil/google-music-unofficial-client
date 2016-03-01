@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "history": "^1.17.0",
+    "playmusic": "^2.1.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",

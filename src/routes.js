@@ -1,13 +1,11 @@
 import React from 'react';
-import {Route} from 'react-router';
+import {Route, IndexRoute} from 'react-router';
 
-import Login from './containers/Login';
 import Authorization from './containers/Authorization';
+import Home from './containers/Home';
 
 export default (
-	<Route>
-		<Route path="/" component={Authorization}>
-		</Route>
-		<Route path="/login" component={Login}></Route>
+	<Route component={Authorization}>
+		<Route path="/" component={Home} />
 	</Route>
 );
