@@ -77,3 +77,28 @@ export function loadPlaylists() {
 		}
 	});
 }
+
+export const LOAD_PLAYLIST_SUCCESS = 'LOAD_PLAYLIST_SUCCESS';
+export const LOAD_PLAYLIST_UNSUCCESS = 'LOAD_PLAYLIST_UNSUCCESS';
+export function loadPlaylist(id) {
+	return dispatch => new Promise((resolve, reject) => {
+		pm.getPlayListEntries((error, data) => {
+			if (error) {
+				dispatch({type: LOAD_PLAYLIST_UNSUCCESS, error});
+				return reject(error);
+			}
+			dispatch({type: LOAD_PLAYLIST_SUCCESS, data})
+			return resolve(data);
+		});
+	});
+
+	return dispatch => request({
+		dispatch, pm,
+		url: 'services/loaduserplaylist?format=jsarray',
+		data: `[["",1],["${id}"]]`,
+		types: {
+			success: LOAD_PLAYLIST_SUCCESS,
+			error: LOAD_PLAYLIST_UNSUCCESS
+		}
+	});
+}

@@ -10,13 +10,13 @@ export default class Library extends React.Component {
 	}
 	render() {
 		const {music} = this.props;
-		console.log(music);
 		return <div>
 			<h3>Library</h3>
 			<Row
 				items={music.playlists}
 				imageField="suggestedPlaylistArtUrl"
 				nameField="title"
+				basePath="playlists"
 			/>
 		</div>;
 	}

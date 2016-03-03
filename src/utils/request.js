@@ -1,4 +1,4 @@
-export default function request({pm, dispatch, url, method, types}) {
+export default function request({pm, dispatch, url, method, data, types}) {
 	return new Promise((resolve, reject) => {
 		function error(err) {
 			if (types && types.error) {
@@ -7,6 +7,7 @@ export default function request({pm, dispatch, url, method, types}) {
 			return reject();
 		}
 		pm.request({
+			data,
         	method: method || 'POST',
         	contentType: 'application/json',
         	url: pm._webURL + url
@@ -19,6 +20,9 @@ export default function request({pm, dispatch, url, method, types}) {
 			} catch (e) {
 				return error(e);
 			};
+			if (body.success === false) {
+				return error(body);
+			}
 			if (types && types.success) {
 				dispatch({type: types.success, data: body});
 			}

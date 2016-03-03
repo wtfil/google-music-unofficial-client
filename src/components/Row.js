@@ -1,9 +1,11 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 class Card extends React.Component {
 	render() {
-		const images = this.props[this.props.imageField];
-		const name = this.props[this.props.nameField];
+		const props = this.props;
+		const images = props[props.imageField];
+		const name = props[props.nameField];
 
 		return <div className="col l3 m4 s12">
 			<div className="gm-card card hoverable">
@@ -14,9 +16,9 @@ class Card extends React.Component {
 					}
 				</div>
 				<div className="card-content">
-					<div><a className="black-text" href="">
+					<div><Link className="black-text" to={props.basePath + '/' + props.id}>
 						{name}
-					</a></div>
+					</Link></div>
 				</div>
 			</div>
 		</div>;
