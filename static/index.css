@@ -3,3 +3,38 @@
 	margin-bottom: 25px;
 	height: 270px;
 }
+
+.layout-padding {
+	padding-bottom: 90px;
+}
+
+.player {
+	background: white;
+	position: fixed;
+	height: 90px;
+	box-sizing: border-box;
+	bottom: 0;
+	width: 100%;
+	margin: 0;
+}
+
+.player__hover-item {
+	width: 80px;
+	opacity: 0;
+}
+.player:hover .player__hover-item {
+	opacity: 1;
+}
+.player__text {
+	width: 100%;
+}
+.player:hover .player__text {
+	flex: 1;
+}
+.player__left {
+	display: flex;
+	flex: 1;
+}
+.player__right {
+	flex: 1;
+}
