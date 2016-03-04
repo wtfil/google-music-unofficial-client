@@ -40,7 +40,7 @@ export default class Library extends React.Component {
 		const playlist = this.props.music.playlists.find(p => p.id === id);
 
 		return <div>
-			<h3>Playlist</h3>
+			<h5>Playlist</h5>
 			<List
 				items={playlist.tracks}
 				onSelect={id => dispatch(playTrack(id))}

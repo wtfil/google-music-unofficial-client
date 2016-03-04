@@ -38,7 +38,7 @@ export default class Player extends React.Component {
 		if (player.trackId) {
 			currentSong = music.songs.find(item => item.trackId === player.trackId);
 		}
-		return <footer className="player z-depth-2 collection">
+		return <footer className="player">
 			<Audio {...player} />
 			<div className="player__content collection-item valign-wrapper">
 				<div className="player__left">
@@ -48,7 +48,7 @@ export default class Player extends React.Component {
 							<div className="song-artist truncate">{currentSong.track.artist} - {currentSong.track.album}</div>
 						</div>
 					}
-					<div className="player__hover-item valign-wrapper">
+					<div className="hide player__hover-item valign-wrapper">
 						<i className="material-icons">thumb_up</i>
 						<i className="material-icons right">thumb_down</i>
 					</div>

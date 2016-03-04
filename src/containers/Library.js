@@ -11,7 +11,7 @@ export default class Library extends React.Component {
 	render() {
 		const {music} = this.props;
 		return <div>
-			<h3>Library</h3>
+			<h5>Library</h5>
 			<Row
 				items={music.playlists}
 				imageField="suggestedPlaylistArtUrl"
