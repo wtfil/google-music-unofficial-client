@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "dev": "electron main.js & webpack-dev-server"
+    "dev": "electron main.js & webpack-dev-server",
+    "build": "webpack && electron-packager . GoogleMusic --platform=darwin --arch=x64 --version=0.35.6 --ignore=\"node_modules/(electron-packager|electron-prebuilt|webpack.*|babel.*|react.*|redux.*|.*loader|less)\""
   },
   "keywords": [
     "Electron",
@@ -21,6 +22,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.23.1",
+    "electron-packager": "^5.2.1",
     "electron-prebuilt": "^0.36.0",
     "less": "^2.6.1",
     "less-loader": "^2.2.2",

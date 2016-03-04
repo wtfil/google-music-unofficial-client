@@ -11,7 +11,12 @@
   	  	<script>
   	  	  	const electron = require('electron');
   	  	  	const Playmusic = require('playmusic');
+			const isProd = require('querystring').parse(window.location.search.slice(1)).isProd === '1';
+			(function () {
+				const s = document.createElement('script');
+				s.src = isProd ? 'build/index.js' : 'http://127.0.0.1:3000/build/index.js'
+				document.body.appendChild(s);
+			}());
   	  	</script>
-  	  	<script src="http://127.0.0.1:3000/build/index.js"></script>
   	</body>
 </html>

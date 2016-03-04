@@ -3,18 +3,24 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const isProd = /\.app\//.test(__filename);
 
 let mainWindow;
 
 function createWindow () {
 	mainWindow = new BrowserWindow({
+		title: 'Google Music',
 		width: 500,
 		height: 600,
 		'min-width': 300
 	});
-	mainWindow.loadURL('file://' + __dirname + '/app/index.html');
+	const file = 'file://' + __dirname + '/app/index.html?isProd=' + Number(isProd);
+	mainWindow.loadURL(file);
 
-	mainWindow.webContents.openDevTools();
+	if (!isProd) {
+		mainWindow.webContents.openDevTools();
+	}
+
 	mainWindow.on('closed', function() {
 		mainWindow = null;
 	});
