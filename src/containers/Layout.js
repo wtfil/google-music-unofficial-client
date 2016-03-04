@@ -6,7 +6,7 @@ export default class Layout extends React.Component {
 	render() {
 		return <main>
 			<Header />
-			<div className="layout-padding">
+			<div className="page">
 				{this.props.children}
 			</div>
 			<Player />

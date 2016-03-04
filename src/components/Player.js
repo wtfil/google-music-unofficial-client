@@ -56,7 +56,7 @@ export default class Player extends React.Component {
 				<div className="valign-wrapper">
 					<i className="material-icons left">skip_previous</i>
 					<i
-						className={classnames('material-icons circle white-text medium', {orange: currentSong}, {'grey': !currentSong})} 
+						className={classnames('material-icons circle white-text medium', {'orange pointer': currentSong}, {'grey': !currentSong})}
 						children={player.isPlaying ? 'pause' : 'play_arrow'}
 						onClick={e => dispatch(pausePlay())}
 					/>

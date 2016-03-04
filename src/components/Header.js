@@ -4,8 +4,8 @@ import {Link} from 'react-router';
 export default class Header extends React.Component {
 	render() {
 		return <nav>
-			<div className="nav-wrapper">
-				<form className="left">
+			<div className="nav-wrapper orange">
+				<form className="left hide-on-small-only">
 					<div className="input-field">
 						<input size={40} id="Search" type="search"/>
 						<label htmlFor="search"><i className="material-icons">search</i></label>

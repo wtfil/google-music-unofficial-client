@@ -3,9 +3,25 @@
 	margin-bottom: 25px;
 	height: 270px;
 }
+body {
+	height: 100%;
+}
 
-.layout-padding {
-	padding-bottom: 90px;
+nav {
+	height: 64px;
+}
+nav ul {
+	line-height: 64px;
+}
+
+.page {
+	position: absolute;
+	top: 64px;
+	padding: 0 10px;
+	z-index: -1;
+	bottom: 73px;
+	width: 100%;
+	overflow: scroll;
 }
 
 .player {
