@@ -26,6 +26,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "classnames": "^2.2.3",
     "history": "^1.17.0",
     "playmusic": "^2.1.1",
     "react": "^0.14.7",

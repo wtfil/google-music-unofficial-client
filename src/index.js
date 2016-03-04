@@ -7,12 +7,12 @@ import createHashHistory from 'history/lib/createHashHistory';
 import createRoutesWithHooks from './createRoutesWithHooks';
 import createStore from './createStore';
 import rawRoutes from './routes';
+import initKeys from './initKeys';
 
-const {ipcRenderer} = electron;
 const store = createStore();
 const routes = createRoutesWithHooks(rawRoutes)(store);
 
-ipcRenderer.on('key', (e, m) => console.log(m));
+initKeys(store);
 
 render(
 	<Provider store={store}>

@@ -18,6 +18,18 @@
 	margin: 0;
 }
 
+.player__content {
+	height: 100%;
+}
+
+.song-title {
+	font-size: 16px;
+}
+.song-artist {
+	font-size: 13px;
+	color: #616161;
+}
+
 .player__hover-item {
 	width: 80px;
 	opacity: 0;

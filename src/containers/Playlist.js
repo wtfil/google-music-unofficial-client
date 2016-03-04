@@ -13,8 +13,8 @@ class Item extends React.Component {
 		}
 		return <li className="collection-item avatar">
 			<i onClick={e => onSelect(trackId)} className="pointer material-icons circle orange">play_arrow</i>
-			<span className="title">{track.title}</span>
-			<p>{track.artist} - {track.album}</p>
+			<div className="song-title">{track.title}</div>
+			<div className="song-artist">{track.artist} - {track.album}</div>
 		</li>;
 	}
 

@@ -103,7 +103,6 @@ export function playTrack(trackId) {
 
 		dispatch({type: TRACK_SELECTED, trackId});
 		if (currentTrackId === trackId) {
-			console.log('skip');
 			return;
 		}
 		pm.getStreamUrl(trackId, (err, url) => {
@@ -113,4 +112,10 @@ export function playTrack(trackId) {
 			dispatch({type: TRACK_LOAD_SUCCESS, trackId, streamUrl: url});
 		});
 	}
+}
+
+export const TRACK_PAUSE_PLAY = 'TRACK_PAUSE_PLAY';
+export function pausePlay() {
+	console.log('pausePlay');
+	return {type: TRACK_PAUSE_PLAY};
 }

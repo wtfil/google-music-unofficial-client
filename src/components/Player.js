@@ -1,13 +1,15 @@
 import React from 'react';
+import classnames from 'classnames';
 import {connect} from 'react-redux';
+import {pausePlay} from '../actions';
 
 class Audio extends React.Component {
 	componentWillMount(props) {
 		this.audio = new window.Audio();
 		this.onProps(this.props);
 	}
-	componentWillUnmout() {
-		this.audio.stop();
+	componentWillUnmount() {
+		this.audio.pause();
 		delete this.audio;
 	}
 	componentWillReceiveProps(props) {
@@ -15,8 +17,8 @@ class Audio extends React.Component {
 	}
 	onProps(props) {
 		if (props.isPlaying) {
-			if (this.audio.src !== props.steamUrl) {
-				this.audio.src = props.steamUrl;
+			if (props.streamUrl && this.audio.src !== props.streamUrl) {
+				this.audio.src = props.streamUrl;
 			}
 			this.audio.play();
 		} else {
@@ -31,19 +33,19 @@ class Audio extends React.Component {
 @connect(state => state)
 export default class Player extends React.Component {
 	render() {
-		const {music, player} = this.props;
+		const {music, player, dispatch} = this.props;
 		let currentSong;
 		if (player.trackId) {
 			currentSong = music.songs.find(item => item.trackId === player.trackId);
 		}
 		return <footer className="player z-depth-2 collection">
 			<Audio {...player} />
-			<div className="collection-item valign-wrapper">
+			<div className="player__content collection-item valign-wrapper">
 				<div className="player__left">
 					{currentSong &&
 						<div className="player__text">
-							<span className="title truncate">{currentSong.track.title}</span>
-							<p className="truncate">{currentSong.track.artist} - {currentSong.track.album}</p>
+							<div className="song-title truncate">{currentSong.track.title}</div>
+							<div className="song-artist truncate">{currentSong.track.artist} - {currentSong.track.album}</div>
 						</div>
 					}
 					<div className="player__hover-item valign-wrapper">
@@ -53,11 +55,15 @@ export default class Player extends React.Component {
 				</div>
 				<div className="valign-wrapper">
 					<i className="material-icons left">skip_previous</i>
-					<i className="material-icons circle orange white-text medium">play_arrow</i>
+					<i
+						className={classnames('material-icons circle white-text medium', {orange: currentSong}, {'grey': !currentSong})} 
+						children={player.isPlaying ? 'pause' : 'play_arrow'}
+						onClick={e => dispatch(pausePlay())}
+					/>
 					<i className="material-icons right">skip_next</i>
 				</div>
 				<div className="player__right valign-wrapper">
-					<i className="material-icons">volume_up</i>
+					<i className="material-icons hide">volume_up</i>
 				</div>
 			</div>
 		</footer>;
