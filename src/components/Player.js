@@ -1,14 +1,51 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
+class Audio extends React.Component {
+	componentWillMount(props) {
+		this.audio = new window.Audio();
+		this.onProps(this.props);
+	}
+	componentWillUnmout() {
+		this.audio.stop();
+		delete this.audio;
+	}
+	componentWillReceiveProps(props) {
+		this.onProps(props);
+	}
+	onProps(props) {
+		if (props.isPlaying) {
+			if (this.audio.src !== props.steamUrl) {
+				this.audio.src = props.steamUrl;
+			}
+			this.audio.play();
+		} else {
+			this.audio.pause();
+		}
+	}
+	render() {
+		return null;
+	}
+}
+
+@connect(state => state)
 export default class Player extends React.Component {
 	render() {
+		const {music, player} = this.props;
+		let currentSong;
+		if (player.trackId) {
+			currentSong = music.songs.find(item => item.trackId === player.trackId);
+		}
 		return <footer className="player z-depth-2 collection">
+			<Audio {...player} />
 			<div className="collection-item valign-wrapper">
 				<div className="player__left">
-					<div className="player__text">
-						<span className="title truncate">Be Careful What You Wish For</span>
-						<p className="truncate">Memphis May Fire - Between The Lies</p>
-					</div>
+					{currentSong &&
+						<div className="player__text">
+							<span className="title truncate">{currentSong.track.title}</span>
+							<p className="truncate">{currentSong.track.artist} - {currentSong.track.album}</p>
+						</div>
+					}
 					<div className="player__hover-item valign-wrapper">
 						<i className="material-icons">thumb_up</i>
 						<i className="material-icons right">thumb_down</i>

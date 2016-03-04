@@ -81,6 +81,7 @@ export function loadPlaylists() {
 export const LOAD_PLAYLIST_SUCCESS = 'LOAD_PLAYLIST_SUCCESS';
 export const LOAD_PLAYLIST_UNSUCCESS = 'LOAD_PLAYLIST_UNSUCCESS';
 export function loadPlaylist(id) {
+	// TODO with 'services/loaduserplaylist'
 	return dispatch => new Promise((resolve, reject) => {
 		pm.getPlayListEntries((error, data) => {
 			if (error) {
@@ -91,14 +92,25 @@ export function loadPlaylist(id) {
 			return resolve(data);
 		});
 	});
+}
 
-	return dispatch => request({
-		dispatch, pm,
-		url: 'services/loaduserplaylist?format=jsarray',
-		data: `[["",1],["${id}"]]`,
-		types: {
-			success: LOAD_PLAYLIST_SUCCESS,
-			error: LOAD_PLAYLIST_UNSUCCESS
+export const TRACK_SELECTED = 'TRACK_SELECTED';
+export const TRACK_LOAD_UNSUCCESS = 'TRACK_LOAD_UNSUCCESS';
+export const TRACK_LOAD_SUCCESS = 'TRACK_LOAD_SUCCESS';
+export function playTrack(trackId) {
+	return (dispatch, getState) => {
+		const currentTrackId = getState().player.trackId;
+
+		dispatch({type: TRACK_SELECTED, trackId});
+		if (currentTrackId === trackId) {
+			console.log('skip');
+			return;
 		}
-	});
+		pm.getStreamUrl(trackId, (err, url) => {
+			if (err) {
+				return dispatch({type: TRACK_LOAD_UNSUCCESS, error: err});
+			}
+			dispatch({type: TRACK_LOAD_SUCCESS, trackId, streamUrl: url});
+		});
+	}
 }
