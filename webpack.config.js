@@ -1,10 +1,10 @@
 var webpack = require('webpack');
 
 module.exports = {
-	context: __dirname,
+	context: __dirname + '/app',
 	entry: './src/index.js',
 	output: {
-	    path: './build',
+	    path: './app/build',
 	    filename: 'index.js',
 	    publicPath: 'http://localhost:3000/build'
 	},

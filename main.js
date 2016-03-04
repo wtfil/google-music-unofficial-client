@@ -12,7 +12,7 @@ function createWindow () {
 		height: 600,
 		'min-width': 300
 	});
-	mainWindow.loadURL('file://' + __dirname + '/index.html');
+	mainWindow.loadURL('file://' + __dirname + '/app/index.html');
 
 	mainWindow.webContents.openDevTools();
 	mainWindow.on('closed', function() {
