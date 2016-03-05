@@ -6,6 +6,7 @@ import Home from './containers/Home';
 import Library from './containers/Library';
 import Layout from './containers/Layout';
 import Playlist from './containers/Playlist';
+import Artist from './containers/Artist';
 
 export default (
 	<Route component={Authorization}>
@@ -14,6 +15,7 @@ export default (
 			<Route path="/radio" component={Home} />
 			<Route path="/library" component={Library} />
 			<Route path="/playlists/:id" component={Playlist} />
+			<Route path="/artist/:id" component={Artist} />
 		</Route>
 	</Route>
 );

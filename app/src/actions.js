@@ -142,3 +142,17 @@ export function playPrev() {
 		playTrack(track.trackId)(dispatch, getState);
 	}
 }
+
+
+export const LOAD_ARTIST_SUCCESS = 'LOAD_ARTIST_SUCCESS';
+export function loadArtist(id) {
+	return dispatch => request({
+		dispatch, pm,
+		url: 'services/fetchartist',
+		jsarray: true,
+		data: `[['', 1], [[${id}]]]`,
+		types: {
+			success: LOAD_ARTIST_SUCCESS
+		}
+	});
+}

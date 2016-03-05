@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router';
 import classnames from 'classnames';
 import {loadPlaylist, playTrack} from '../actions';
 import Row from '../components/Row';
@@ -8,7 +9,7 @@ import formatTime from '../utils/formatTime';
 class Item extends React.Component {
 
 	render(props) {
-		const {current, album, artist, title, duration, trackId, onSelect, index} = this.props;
+		const {current, album, artist, title, duration, trackId, onSelect, artistId, index} = this.props;
 		const isCurrent = current === trackId;
 
 		return <tr className={classnames('playlist__item song-title', {current: isCurrent} )}>
@@ -27,7 +28,7 @@ class Item extends React.Component {
 			}
 			<td className="playlist__name">{title}</td>
 			<td className="playlist__duration grey-text hide-on-small-only">{formatTime(duration)}</td>
-			<td className="playlist__artist">{artist}</td>
+			<td className="playlist__artist"><Link to={'artist/' + artistId}>{artist}</Link></td>
 			<td className="playlist__artist hide-on-small-only">{album}</td>
 		</tr>;
 	}

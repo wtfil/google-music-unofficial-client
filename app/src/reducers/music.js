@@ -2,7 +2,8 @@ import * as actions from '../actions';
 const DEFAULT_MUSIC = {
 	songs: [],
 	userPlaylists: [],
-	playlists: []
+	playlists: [],
+	artists: []
 };
 
 export default function music(state = DEFAULT_MUSIC, action) {
@@ -17,6 +18,11 @@ export default function music(state = DEFAULT_MUSIC, action) {
 				...state,
 				songs: [...state.songs, ...action.data],
 				playlists: [...state.playlists, playlist]
+			};
+		case actions.LOAD_ARTIST_SUCCESS:
+			return {
+				...state,
+				artists: [...state.artists, ...action.data]
 			};
 		default:
 			return state;
