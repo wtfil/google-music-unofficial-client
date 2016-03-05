@@ -1,20 +1,25 @@
 import React from 'react';
 import classnames from 'classnames';
 import {connect} from 'react-redux';
-import {pausePlay} from '../actions';
+import {pausePlay, playNext, playPrev} from '../actions';
 
 class Audio extends React.Component {
 	componentWillMount(props) {
 		this.audio = new window.Audio();
-		this.audio.addEventListener('timeupdate', e => {
+		this.onProgress = e => {
 			this.props.onProgress({
 				progress: this.audio.currentTime /this.audio.duration
 			});
-		});
+		};
+		this.onEnd = e => this.props.onEnd();
+		this.audio.addEventListener('timeupdate', this.onProgress);
+		this.audio.addEventListener('ended', this.onEnd);
 		this.onProps(this.props);
 	}
 	componentWillUnmount() {
 		this.audio.pause();
+		this.audio.removeEventListener('timeupdate', this.onProgress);
+		this.audio.removeEventListener('ended', this.onEnd);
 		delete this.audio;
 	}
 	componentWillReceiveProps(props) {
@@ -29,7 +34,9 @@ class Audio extends React.Component {
 			if (Math.abs(position - this.audio.currentTime) > 1) {
 				this.audio.currentTime = position;
 			}
-			this.audio.play();
+			if (this.audio.currentTime !== this.audio.duration) {
+				this.audio.play();
+			}
 		} else {
 			this.audio.pause();
 		}
@@ -69,6 +76,7 @@ export default class Player extends React.Component {
 				{...player}
 				progress={progress}
 				onProgress={::this.onProgress}
+				onEnd={e => dispatch(playNext())}
 			/>
 			<div onClick={::this.setProgress} className="player__progress pointer progress grey lighten-3">
 				<div className="determinate orange" style={{width: 100 * progress + '%'}}></div>
@@ -87,13 +95,21 @@ export default class Player extends React.Component {
 					</div>
 				</div>
 				<div className="valign-wrapper">
-					<i className="material-icons left">skip_previous</i>
+					<i
+						className="material-icons left pointer"
+						children="skip_previous"
+						onClick={e => dispatch(playPrev())}
+					/>
 					<i
 						className={classnames('material-icons circle white-text medium', {'orange pointer': currentSong}, {'grey': !currentSong})}
 						children={player.isPlaying ? 'pause' : 'play_arrow'}
 						onClick={e => dispatch(pausePlay())}
 					/>
-					<i className="material-icons right">skip_next</i>
+					<i
+						className="material-icons right pointer"
+						children="skip_next"
+						onClick={e => dispatch(playNext())}
+					/>
 				</div>
 				<div className="player__right valign-wrapper">
 					<i className="material-icons hide">volume_up</i>

@@ -115,6 +115,30 @@ export function playTrack(trackId) {
 }
 
 export const TRACK_PAUSE_PLAY = 'TRACK_PAUSE_PLAY';
+export const TRACK_PAUSE = 'TRACK_PAUSE';
 export function pausePlay() {
 	return {type: TRACK_PAUSE_PLAY};
+}
+
+export function playNext() {
+	return (dispatch, getState) => {
+		const {player} = getState();
+		const track = player.queue[player.queueIndex + 1];
+		if (track) {
+			playTrack(track.trackId)(dispatch, getState);
+		} else {
+			dispatch({type: TRACK_PAUSE});
+		}
+	}
+}
+
+export function playPrev() {
+	return (dispatch, getState) => {
+		const {player} = getState();
+		const track = (Date.now() - player.selectedAt < 2000 && player.queueIndex > 0) ?
+			player.queue[player.queueIndex - 1] :
+			player.queue[player.queueIndex];
+
+		playTrack(track.trackId)(dispatch, getState);
+	}
 }
