@@ -37,7 +37,7 @@ export function login(opts) {
 	return dispatch => {
 		pm.login(opts, (err, data) => {
 			if (err) {
-				return dispatch({type: LOGIN_UNSUCCESS});
+				return dispatch({type: LOGIN_UNSUCCESS, message: 'Wrong email or password'});
 			}
 			set('google-auth', data);
 			authorize();

@@ -5,9 +5,9 @@ const DEFAULT_PROFILE = {
 export default function profile(state = DEFAULT_PROFILE, action) {
 	switch(action.type) {
 		case actions.LOGIN_SUCCESS:
-			return {...state, auth: action.auth};
+			return {...state, auth: action.auth, message: ''};
 		case actions.LOGIN_UNSUCCESS:
-			return {...state, auth: null};
+			return {...state, auth: null, message: action.message};
 		default:
 			return state;
 	}
