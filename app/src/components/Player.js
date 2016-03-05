@@ -77,8 +77,8 @@ export default class Player extends React.Component {
 				<div className="player__left">
 					{currentSong &&
 						<div className="player__text">
-							<div className="song-title truncate">{currentSong.track.title}</div>
-							<div className="song-artist truncate">{currentSong.track.artist} - {currentSong.track.album}</div>
+							<div className="song-title truncate">{currentSong.title}</div>
+							<div className="song-artist truncate">{currentSong.artist} - {currentSong.album}</div>
 						</div>
 					}
 					<div className="hide player__hover-item valign-wrapper">
