@@ -7,8 +7,8 @@ class Card extends React.Component {
 		const images = props[props.imageField];
 		const name = props[props.nameField];
 
-		return <div className="col l3 m4 s12">
-			<div className="gm-card card hoverable">
+		return <div className="grid__item">
+			<div className="card hoverable">
 				<div className="card-image">
 					{images.length ?
 						<img width={208} height={208} src={images[0]} alt="" /> :
@@ -27,14 +27,16 @@ class Card extends React.Component {
 export default class Row extends React.Component {
 	render() {
 		const {items, ...props} = this.props;
-		return <div className="row">
-			{items.map((item, index) => {
-				return <Card
-					key={index}
-					{...props}
-					{...item}
-				/>
-			 })}
+		return <div className="grid">
+			<div className="grid__content">
+				{items.map((item, index) => {
+					return <Card
+						key={index}
+						{...props}
+						{...item}
+					/>
+				})}
+			</div>
 		</div>;
 	}
 }

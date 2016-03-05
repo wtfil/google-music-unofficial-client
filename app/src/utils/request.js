@@ -41,11 +41,13 @@ const fields = {
 	3: 'artist',
 	4: 'album',
 	11: 'ganre',
+	13: 'duration',
 	36: 'previewImage',
 	43: 'id',
 	50: 'trackId'
 };
 function jsArrayToJson(data) {
+	console.log(data);
 	return data[1][0].map(parseItem);
 }
 function parseItem(item) {

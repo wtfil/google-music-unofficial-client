@@ -1,8 +1,3 @@
-.gm-card {
-	width: 208px;
-	margin-bottom: 25px;
-	height: 270px;
-}
 body {
 	height: 100%;
 }
@@ -19,7 +14,7 @@ nav ul {
 	top: 64px;
 	padding: 0 10px;
 	z-index: -1;
-	bottom: 73px;
+	bottom: 74px;
 	width: 100%;
 	overflow: scroll;
 }
@@ -82,4 +77,67 @@ nav ul {
 .login-form {
 	padding: 20px;
 	width: 100%;
+}
+
+.grid {
+	position: relative;
+	&__content {
+		position: absolute;
+		left: -5px;
+		right: -5px;
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+	&__item {
+		margin: 0 5px 10px 5px;
+		width: 208px;
+		height: 270px;
+	}
+}
+
+.playlist {
+	table-layout: fixed;
+	&__number {
+		min-width: 40px;
+		width: 10%;
+	}
+	&__duration {
+		width: 10%;
+	}
+	&__name {
+		width: 40%;
+	}
+	&__artist {
+		width: 20%;
+	}
+	&__index {
+		padding: 0 5px;
+	}
+	&__icon {
+		display: none;
+	}
+	&__item.current,
+	&__item:hover {
+		background-color: #eceff1;
+	}
+	&__item:hover &__index {
+		display: none;
+	}
+	&__item:hover &__icon {
+		display: block;
+	}
+	& td {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	@keyframes playing {
+		0% {transform: rotate(0);}
+		50% {transform: rotate(15deg);}
+		100% {transform: rotate(-10deg);}
+	}
+	&__note {
+		animation: playing 0.5s infinite;
+	}
 }
