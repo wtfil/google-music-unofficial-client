@@ -7,14 +7,12 @@ import Row from '../components/Row';
 class Item extends React.Component {
 
 	render(props) {
-		const {track, trackId, onSelect} = this.props;
-		if (!track) {
-			return null;
-		}
+		const {album, artist, title, trackId, onSelect} = this.props;
+
 		return <li className="collection-item avatar">
 			<i onClick={e => onSelect(trackId)} className="pointer material-icons circle orange">play_arrow</i>
-			<div className="song-title">{track.title}</div>
-			<div className="song-artist">{track.artist} - {track.album}</div>
+			<div className="song-title">{title}</div>
+			<div className="song-artist">{artist} - {album}</div>
 		</li>;
 	}
 
@@ -37,7 +35,7 @@ export default class Library extends React.Component {
 	}
 	render() {
 		const {dispatch, params: {id}} = this.props;
-		const playlist = this.props.music.playlists.find(p => p.id === id);
+		const playlist = this.props.music.playlists.find(p => p.id === id && p.tracks);
 
 		return <div>
 			<h5>Playlist</h5>

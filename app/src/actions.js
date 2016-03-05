@@ -81,16 +81,16 @@ export function loadPlaylists() {
 export const LOAD_PLAYLIST_SUCCESS = 'LOAD_PLAYLIST_SUCCESS';
 export const LOAD_PLAYLIST_UNSUCCESS = 'LOAD_PLAYLIST_UNSUCCESS';
 export function loadPlaylist(id) {
-	// TODO with 'services/loaduserplaylist'
-	return dispatch => new Promise((resolve, reject) => {
-		pm.getPlayListEntries((error, data) => {
-			if (error) {
-				dispatch({type: LOAD_PLAYLIST_UNSUCCESS, error});
-				return reject(error);
-			}
-			dispatch({type: LOAD_PLAYLIST_SUCCESS, data})
-			return resolve(data);
-		});
+	return dispatch => request({
+		dispatch, pm,
+		url: 'services/loaduserplaylist',
+		jsarray: true,
+		data: `[['', 1], [${id}]]`,
+		extendAction: {id},
+		types: {
+			error: LOAD_PLAYLIST_UNSUCCESS,
+			success: LOAD_PLAYLIST_SUCCESS
+		}
 	});
 }
 
@@ -116,6 +116,5 @@ export function playTrack(trackId) {
 
 export const TRACK_PAUSE_PLAY = 'TRACK_PAUSE_PLAY';
 export function pausePlay() {
-	console.log('pausePlay');
 	return {type: TRACK_PAUSE_PLAY};
 }

@@ -1,5 +1,7 @@
 import * as actions from '../actions';
 const DEFAULT_MUSIC = {
+	songs: [],
+	playlists: []
 };
 
 export default function music(state = DEFAULT_MUSIC, action) {
@@ -9,25 +11,11 @@ export default function music(state = DEFAULT_MUSIC, action) {
 		case actions.LOAD_PLAYLISTS_SUCCESS:
 			return {...state, playlists: action.data.playlist};
 		case actions.LOAD_PLAYLIST_SUCCESS:
-			const items = action.data.data.items;
-			let playlists = items.reduce((o, item) => {
-				let current = o[item.playlistId];
-				if (!current) {
-					const playlist = state.playlists && state.playlists.find(p => p.id === item.playlistId);
-					current = o[item.playlistId] = {
-						...playlist,
-						id: item.playlistId,
-						tracks: []
-					};
-				}
-				current.tracks.push(item);
-				return o;
-			}, {});
-			playlists = Object.keys(playlists).map(id => playlists[id]);
+			const playlist = {id: action.id, tracks: action.data};
 			return {
 				...state,
-				playlists,
-				songs: items
+				songs: [...state.songs, action.data],
+				playlists: [...state.playlists, playlist]
 			};
 		default:
 			return state;

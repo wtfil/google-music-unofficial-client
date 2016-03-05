@@ -1,6 +1,7 @@
 import * as actions from '../actions';
 const DEFAULT_PLAYER = {
 	isPlaying: false,
+	queue: [],
 	streamUrl: null,
 	trackId: null
 };
