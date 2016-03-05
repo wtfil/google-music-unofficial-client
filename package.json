@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron main.js",
     "dev": "electron main.js & webpack-dev-server",
-    "build": "webpack && electron-packager . GoogleMusic --platform=darwin --arch=x64 --version=0.35.6 --ignore=\"node_modules/(electron-packager|electron-prebuilt|webpack.*|babel.*|react.*|redux.*|.*loader|less)\""
+    "build": "webpack && electron-packager . GoogleMusic --platform=darwin --arch=x64 --version=0.35.6 --ignore=\"node_modules/(electron-packager|electron-prebuilt|webpack.*|babel.*|react.*|redux.*|.*loader|less)\" --icon=./app/icon"
   },
   "keywords": [
     "Electron",
