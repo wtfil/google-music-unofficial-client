@@ -171,3 +171,19 @@ export function loadAlbum(id) {
 		}
 	});
 }
+
+export const LOAD_SUGGEST_SUCCESS = 'LOAD_SUGGEST_SUCCESS';
+export const LOAD_SUGGEST_START = 'LOAD_SUGGEST_START';
+export function loadSuggest(text) {
+	return dispatch => request({
+		dispatch, pm,
+		url: 'services/fetchquerysuggestions',
+		jsarray: true,
+		data: `[['', 1], [${text}]]`,
+		extendAction: {text},
+		types: {
+			start: LOAD_SUGGEST_START,
+			success: LOAD_SUGGEST_SUCCESS
+		}
+	});
+}

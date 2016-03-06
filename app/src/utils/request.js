@@ -6,6 +6,9 @@ export default function request({pm, dispatch, extendAction, jsarray, url, metho
 			}
 			return reject();
 		}
+		if (types && types.start) {
+			dispatch({type: types.start, ...extendAction});
+		}
 		pm.request({
 			data,
 			method: method || 'POST',
@@ -79,9 +82,16 @@ function parseItem(item) {
 	if (!Array.isArray(item)) {
 		return item;
 	}
+
+	// this is experimental. works for suggest
+	if (item.length == 2) {
+		return item[1];
+	}
+
 	if (item.slice().pop() !== 1) {
 		return item.map(parseItem);
 	}
+
 	const fields = schemas[item.length];
 	if (!fields) {
 		return {};

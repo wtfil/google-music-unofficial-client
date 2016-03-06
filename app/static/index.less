@@ -144,3 +144,20 @@ nav ul {
 	max-height: 100px;
 	overflow: hidden;
 }
+
+.search {
+	&__suggest {
+		margin-top: -15px;
+		background: white;
+	}
+	&__suggest-item {
+		cursor: pointer;
+		color: #757575;
+		font-size: 14px;
+		padding-left: 56px;
+		box-sizing: border-box;
+		&:hover, &.selected {
+			background: #f5f5f5;
+		}
+	}
+}
