@@ -56,6 +56,11 @@ export default function player(state = DEFAULT_PLAYER, action) {
 				...state,
 				screenQueue: action.data[0].topSongs
 			};
+		case actions.LOAD_ALBUM_SUCCESS:
+			return {
+				...state,
+				screenQueue: action.data[0].tracks
+			};
 		default:
 			return state;
 	}

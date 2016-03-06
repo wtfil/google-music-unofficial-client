@@ -158,3 +158,16 @@ export function loadArtist(id) {
 		}
 	});
 }
+
+export const LOAD_ALBUM_SUCCESS = 'LOAD_ALBUM_SUCCESS';
+export function loadAlbum(id) {
+	return dispatch => request({
+		dispatch, pm,
+		url: 'services/fetchalbum',
+		jsarray: true,
+		data: `[['', 1], [[${id}], true]]`,
+		types: {
+			success: LOAD_ALBUM_SUCCESS
+		}
+	});
+}

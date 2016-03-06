@@ -19,6 +19,7 @@ class Card extends React.Component {
 				<div className="card-content">
 					<div><Link className="black-text" to={props.basePath + '/' + props.id}>
 						{name}
+						{props.year && ` - ${props.year}`}
 					</Link></div>
 				</div>
 			</div>

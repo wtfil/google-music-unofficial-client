@@ -7,6 +7,7 @@ import Library from './containers/Library';
 import Layout from './containers/Layout';
 import Playlist from './containers/Playlist';
 import Artist from './containers/Artist';
+import Album from './containers/Album';
 
 export default (
 	<Route component={Authorization}>
@@ -16,6 +17,7 @@ export default (
 			<Route path="/library" component={Library} />
 			<Route path="/playlists/:id" component={Playlist} />
 			<Route path="/artists/:id" component={Artist} />
+			<Route path="/albums/:id" component={Album} />
 		</Route>
 	</Route>
 );

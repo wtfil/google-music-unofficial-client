@@ -5,7 +5,7 @@ import formatTime from '../utils/formatTime';
 
 class Item extends React.Component {
 	render(props) {
-		const {current, album, artist, title, duration, trackId, onSelect, artistId, index} = this.props;
+		const {current, album, albumId, artist, title, duration, trackId, onSelect, artistId, index} = this.props;
 		const isCurrent = current === trackId;
 
 		return <tr className={classnames('playlist__item song-title', {current: isCurrent} )}>
@@ -24,8 +24,12 @@ class Item extends React.Component {
 			}
 			<td className="playlist__name">{title}</td>
 			<td className="playlist__duration grey-text hide-on-small-only">{formatTime(duration)}</td>
-			<td className="playlist__artist"><Link to={'artists/' + artistId}>{artist}</Link></td>
-			<td className="playlist__artist hide-on-small-only">{album}</td>
+			<td className="playlist__artist">
+				<Link to={'artists/' + artistId}>{artist}</Link>
+			</td>
+			<td className="playlist__artist hide-on-small-only">
+				<Link to={'albums/' + albumId}>{album}</Link>
+			</td>
 		</tr>;
 	}
 }

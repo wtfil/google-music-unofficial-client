@@ -51,8 +51,10 @@ const schemas = {
 		1: 'name',
 		2: 'artist',
 		3: 'image',
+		6: 'tracks',
 		7: 'id',
-		10: 'artistId',
+		9: 'year',
+		10: 'artistId'
 	},
 	// track
 	64: {

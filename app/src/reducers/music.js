@@ -3,7 +3,8 @@ const DEFAULT_MUSIC = {
 	songs: [],
 	userPlaylists: [],
 	playlists: [],
-	artists: []
+	artists: [],
+	albums: []
 };
 
 export default function music(state = DEFAULT_MUSIC, action) {
@@ -24,6 +25,12 @@ export default function music(state = DEFAULT_MUSIC, action) {
 				...state,
 				artists: [...state.artists, action.data[0]],
 				songs: [...state.songs, ...action.data[0].topSongs]
+			};
+		case actions.LOAD_ALBUM_SUCCESS:
+			return {
+				...state,
+				songs: [...state.songs, ...action.data[0].tracks],
+				albums: [...state.albums, action.data[0]]
 			};
 		default:
 			return state;

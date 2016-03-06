@@ -13,8 +13,8 @@ export default class Artist extends React.Component {
 		const {dispatch, music, player, params: {id}} = this.props;
 		const artist = music.artists.find(item => item.id === id);
 		return <div>
-			<div className="card tiny">
-				<div className="card-image">
+			<div className="card">
+				<div className="card-image preview">
 					<img src={artist.image} />
 					<span className="card-title">{artist.name}</span>
 				</div>
