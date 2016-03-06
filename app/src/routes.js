@@ -15,7 +15,7 @@ export default (
 			<Route path="/radio" component={Home} />
 			<Route path="/library" component={Library} />
 			<Route path="/playlists/:id" component={Playlist} />
-			<Route path="/artist/:id" component={Artist} />
+			<Route path="/artists/:id" component={Artist} />
 		</Route>
 	</Route>
 );

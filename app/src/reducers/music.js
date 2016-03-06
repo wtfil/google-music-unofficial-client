@@ -22,7 +22,8 @@ export default function music(state = DEFAULT_MUSIC, action) {
 		case actions.LOAD_ARTIST_SUCCESS:
 			return {
 				...state,
-				artists: [...state.artists, ...action.data]
+				artists: [...state.artists, action.data[0]],
+				songs: [...state.songs, ...action.data[0].topSongs]
 			};
 		default:
 			return state;

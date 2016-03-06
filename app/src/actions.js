@@ -94,23 +94,25 @@ export function loadPlaylist(id) {
 	});
 }
 
-export const TRACK_SELECTED = 'TRACK_SELECTED';
+export const TRACK_PLAYING = 'TRACK_PLAYING';
 export const TRACK_LOAD_UNSUCCESS = 'TRACK_LOAD_UNSUCCESS';
 export const TRACK_LOAD_SUCCESS = 'TRACK_LOAD_SUCCESS';
 export function playTrack(trackId) {
 	return (dispatch, getState) => {
-		const currentTrackId = getState().player.trackId;
-
-		dispatch({type: TRACK_SELECTED, trackId});
-		if (currentTrackId === trackId) {
-			return;
-		}
+		dispatch({type: TRACK_PLAYING, trackId});
 		pm.getStreamUrl(trackId, (err, url) => {
 			if (err) {
 				return dispatch({type: TRACK_LOAD_UNSUCCESS, error: err});
 			}
 			dispatch({type: TRACK_LOAD_SUCCESS, trackId, streamUrl: url});
 		});
+	}
+}
+export const TRACK_SELECTED = 'TRACK_SELECTED';
+export function selectTrack(trackId) {
+	return (dispatch, getState) => {
+		dispatch({type: TRACK_SELECTED, trackId});
+		return playTrack(trackId)(dispatch, getState);
 	}
 }
 

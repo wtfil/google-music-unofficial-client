@@ -2,6 +2,7 @@ import * as actions from '../actions';
 const DEFAULT_PLAYER = {
 	isPlaying: false,
 	queue: [],
+	screenQueue: [],
 	streamUrl: null,
 	trackId: null
 };
@@ -19,6 +20,12 @@ export default function player(state = DEFAULT_PLAYER, action) {
 				isPlaying: false
 			};
 		case actions.TRACK_SELECTED:
+			return {
+				...state,
+				trackId: action.trackId,
+				queue: state.screenQueue
+			};
+		case actions.TRACK_PLAYING:
 			let queueIndex, i;
 			for (i = 0; i < state.queue.length; i ++) {
 				if (state.queue[i].trackId === action.trackId) {
@@ -28,9 +35,10 @@ export default function player(state = DEFAULT_PLAYER, action) {
 			}
 			return {
 				...state,
+				isPlaying: true,
 				selectedAt: Date.now(),
-				queueIndex,
-				trackId: action.trackId
+				trackId: action.trackId,
+				queueIndex
 			};
 		case actions.TRACK_LOAD_SUCCESS:
 			return {
@@ -41,7 +49,12 @@ export default function player(state = DEFAULT_PLAYER, action) {
 		case actions.LOAD_PLAYLIST_SUCCESS:
 			return {
 				...state,
-				queue: action.data
+				screenQueue: action.data
+			};
+		case actions.LOAD_ARTIST_SUCCESS:
+			return {
+				...state,
+				screenQueue: action.data[0].topSongs
 			};
 		default:
 			return state;

@@ -8,6 +8,7 @@ module.exports = {
 	    filename: 'index.js',
 	    publicPath: 'http://localhost:3000/build'
 	},
+	devtool: 'source-map',
 	module: {
 		loaders: [
 			{

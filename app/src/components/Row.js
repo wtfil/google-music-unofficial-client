@@ -4,14 +4,15 @@ import {Link} from 'react-router';
 class Card extends React.Component {
 	render() {
 		const props = this.props;
-		const images = props[props.imageField];
 		const name = props[props.nameField];
+		const images = props.imageField ? props[props.imageField] : props.image;
+		const image = Array.isArray(images) ? images[0] : images;
 
 		return <div className="grid__item">
 			<div className="card hoverable">
 				<div className="card-image">
-					{images.length ?
-						<img width={208} height={208} src={images[0]} alt="" /> :
+					{image ?
+						<img width={208} height={208} src={image} /> :
 						null
 					}
 				</div>
