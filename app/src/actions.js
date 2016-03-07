@@ -187,3 +187,19 @@ export function loadSuggest(text) {
 		}
 	});
 }
+
+export const SEARCH_STARTED = 'SEARCH_STARTED';
+export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
+export function search(text) {
+	return dispatch => request({
+		dispatch, pm,
+		url: 'services/search',
+		jsarray: true,
+		data: `[['',1],[${text},10,[2,3,1,7,4,5,6,8],1]]`,
+		extendAction: {text},
+		types: {
+			start: SEARCH_STARTED,
+			success: SEARCH_SUCCESS
+		}
+	});
+}

@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 class Card extends React.Component {
 	render() {
 		const props = this.props;
-		const name = props[props.nameField];
+		const name = props.nameField ? props[props.nameField]: props.name;
 		const images = props.imageField ? props[props.imageField] : props.image;
 		const image = Array.isArray(images) ? images[0] : images;
 

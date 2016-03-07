@@ -24,7 +24,7 @@ export default function request({pm, dispatch, extendAction, jsarray, url, metho
 				return error(e);
 			};
 			if (jsarray) {
-				body = jsArrayToJson(body[1][0]);
+				body = jsArrayToJson(body);
 			}
 			if (body.success === false) {
 				return error(body);
@@ -39,6 +39,13 @@ export default function request({pm, dispatch, extendAction, jsarray, url, metho
 
 
 const schemas = {
+	// search result
+	15: {
+		0: 'tracks',
+		1: 'albums',
+		2: 'artists',
+		5: 'bestMatch'
+	},
 	// artist
 	19: {
 		1: 'id',
@@ -76,7 +83,9 @@ const schemas = {
 };
 
 function jsArrayToJson(data) {
-	return data.map(parseItem);
+	return data[1].length === 1 ?
+		data[1][0].map(parseItem) :
+		parseItem(data[1]);
 }
 function parseItem(item) {
 	if (!Array.isArray(item)) {
@@ -87,12 +96,12 @@ function parseItem(item) {
 	if (item.length == 2) {
 		return item[1];
 	}
+	const fields = schemas[item.length];
 
-	if (item.slice().pop() !== 1) {
+	if (!fields && item.filter(Boolean).every(Array.isArray)) {
 		return item.map(parseItem);
 	}
 
-	const fields = schemas[item.length];
 	if (!fields) {
 		return {};
 	}
@@ -103,4 +112,3 @@ function parseItem(item) {
 		return o;
 	}, {});
 }
-

@@ -6,6 +6,7 @@ const INIT_STATE = {
 };
 export default function search(state = INIT_STATE, action) {
 	switch (action.type) {
+		case actions.SEARCH_STARTED:
 		case actions.LOAD_SUGGEST_START:
 			return {
 				...state,
@@ -17,6 +18,14 @@ export default function search(state = INIT_STATE, action) {
 				suggests: [...state.suggests, {
 					text: action.text,
 					items: action.data
+				}]
+			};
+		case actions.SEARCH_SUCCESS:
+			return {
+				...state,
+				results: [...state.results, {
+					text: action.text,
+					...action.data
 				}]
 			};
 	}
