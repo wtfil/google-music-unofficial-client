@@ -5,7 +5,7 @@ import formatTime from '../utils/formatTime';
 
 class Item extends React.Component {
 	render(props) {
-		const {current, album, albumId, artist, title, duration, trackId, onSelect, artistId, index} = this.props;
+		const {small, current, album, albumId, artist, title, duration, trackId, onSelect, artistId, index} = this.props;
 		const isCurrent = current === trackId;
 
 		return <tr className={classnames('playlist__item song-title', {current: isCurrent} )}>
@@ -23,7 +23,7 @@ class Item extends React.Component {
 				</td>
 			}
 			<td className="playlist__name">{title}</td>
-			<td className="playlist__duration grey-text hide-on-small-only">{formatTime(duration)}</td>
+			{!small && <td className="playlist__duration grey-text hide-on-small-only">{formatTime(duration)}</td>}
 			<td className="playlist__artist">
 				<Link to={'artists/' + artistId}>{artist}</Link>
 			</td>
@@ -42,7 +42,7 @@ export default class List extends React.Component {
 				<tr>
 					<td className="playlist__number">#</td>
 					<td className="playlist__name">NAME</td>
-					<td className="playlist__duration hide-on-small-only"><i className="tiny right material-icons">access_time</i></td>
+					{!props.small && <td className="playlist__duration hide-on-small-only"><i className="tiny right material-icons">access_time</i></td>}
 					<td className="playlist__artist">ARTIST</td>
 					<td className="playlist__artist hide-on-small-only">ALBUM</td>
 				</tr>

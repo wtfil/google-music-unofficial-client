@@ -1,7 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 import {connect} from 'react-redux';
-import {setProgress, pausePlay, playNext, playPrev} from '../actions';
+import {setProgress, pausePlay, playNext, playPrev, selectTrack} from '../actions';
+import List from '../components/List';
 
 class Audio extends React.Component {
 	componentWillMount(props) {
@@ -47,13 +48,23 @@ class Audio extends React.Component {
 @connect(state => state)
 export default class Player extends React.Component {
 
+	constructor() {
+		super();
+		this.state = {showQueue: false};
+	}
 	setProgress(e) {
 		const progress = e.pageX / e.target.offsetWidth;
 		this.props.dispatch(setProgress(progress));
 	}
+	toggleQueue() {
+		this.setState({
+			showQueue: !this.state.showQueue
+		});
+	}
 
 	render() {
 		const {music, player, dispatch} = this.props;
+		const {showQueue} = this.state;
 		let currentSong;
 		if (player.trackId) {
 			currentSong = music.songs.find(item => item.trackId === player.trackId);
@@ -68,6 +79,18 @@ export default class Player extends React.Component {
 			<div onClick={::this.setProgress} className="player__progress pointer progress grey lighten-3">
 				<div className="determinate orange" style={{width: 100 * player.progress + '%'}}></div>
 			</div>
+			{showQueue &&
+				<div className="player__queue z-depth-2">
+					<div className="player__queue-inner">
+						<List
+							items={player.queue}
+							current={player.trackId}
+							onSelect={trackId => dispatch(selectTrack(trackId))}
+							small
+						/>
+					</div>
+				</div>
+			}
 			<div className="player__content collection-item valign-wrapper">
 				<div className="player__left">
 					{currentSong &&
@@ -99,6 +122,10 @@ export default class Player extends React.Component {
 					/>
 				</div>
 				<div className="player__right valign-wrapper">
+					{player.queue.length ?
+						<i className="material-icons pointer" onClick={::this.toggleQueue}>queue_music</i>
+						: null
+					}
 					<i className="material-icons hide">volume_up</i>
 				</div>
 			</div>

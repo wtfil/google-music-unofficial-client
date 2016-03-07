@@ -30,16 +30,64 @@ nav ul {
 	width: 100%;
 	margin: 0;
 
+	&__content {
+		height: 100%;
+	}
 	&__progress {
 		margin: 0;
 		left: 0;
 		position: absolute;
 	}
+	&__hover-item {
+		width: 80px;
+		opacity: 0;
+	}
+	&:hover &__hover-item {
+		opacity: 1;
+	}
+	&__text {
+		width: 100%;
+	}
+	&:hover &__text {
+		flex: 1;
+	}
+	&__left {
+		display: flex;
+		flex: 1;
+	}
+	&__right {
+		flex: 1;
+		flex-direction: row-reverse;
+	}
+	&__queue {
+		position: absolute;
+		right: 5px;
+		width: 66%;
+		bottom: 60px;
+		background: white;
+		max-height: 300px;
+		&-inner {
+			box-sizing: border-box;
+			max-height: 300px;
+			padding: 10px;
+			overflow: scroll;
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
+		&:after {
+			content: '';
+			width: 10px;
+			height: 10px;
+			transform: rotate(45deg);
+			position: absolute;
+			bottom: -5px;
+			right: 10px;
+			background: white;
+		}
+	}
 }
 
-.player__content {
-	height: 100%;
-}
 
 .song-title {
 	font-size: 16px;
@@ -49,26 +97,6 @@ nav ul {
 	color: #616161;
 }
 
-.player__hover-item {
-	width: 80px;
-	opacity: 0;
-}
-.player:hover .player__hover-item {
-	opacity: 1;
-}
-.player__text {
-	width: 100%;
-}
-.player:hover .player__text {
-	flex: 1;
-}
-.player__left {
-	display: flex;
-	flex: 1;
-}
-.player__right {
-	flex: 1;
-}
 
 .pointer {
 	cursor: pointer;
