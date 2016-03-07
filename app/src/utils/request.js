@@ -92,19 +92,21 @@ function parseItem(item) {
 		return item;
 	}
 
-	// this is experimental. works for suggest
-	if (item.length == 2) {
-		return item[1];
-	}
 	const fields = schemas[item.length];
+	const arrayOfArrays = item.every(Array.isArray);
 
-	if (!fields && item.filter(Boolean).every(Array.isArray)) {
+	if (arrayOfArrays) {
 		return item.map(parseItem);
 	}
 
 	if (!fields) {
-		return {};
+		// this is experimental. works for suggest
+		if (item.length == 2) {
+			return item[1];
+		}
+		return item.map(parseItem);
 	}
+
 	return item.reduce((o, val, index) => {
 		if (index in fields) {
 			o[fields[index]] = parseItem(val);

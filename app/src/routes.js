@@ -13,7 +13,7 @@ import Search from './containers/Search';
 export default (
 	<Route component={Authorization}>
 		<Route component={Layout}>
-			<Route path="/" component={Home} />
+			<Route path="/" component={Library} />
 			<Route path="/radio" component={Home} />
 			<Route path="/library" component={Library} />
 			<Route path="/playlists/:id" component={Playlist} />

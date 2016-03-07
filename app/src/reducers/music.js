@@ -32,6 +32,11 @@ export default function music(state = DEFAULT_MUSIC, action) {
 				songs: [...state.songs, ...action.data[0].tracks],
 				albums: [...state.albums, action.data[0]]
 			};
+		case actions.SEARCH_SUCCESS:
+			return {
+				...state,
+				songs: [...state.songs, ...action.data.tracks]
+			};
 		default:
 			return state;
 	}
