@@ -33,6 +33,7 @@ export default class SearchInput extends React.Component {
 			e.stopPropagation();
 			const text = suggestSelected === -1 ?
 				this.props.value : this.props.suggest.items[suggestSelected]
+			this.setState({suggestSelected: -1, open: false})
 			this.props.onSeach(text);
 		}
 	}
