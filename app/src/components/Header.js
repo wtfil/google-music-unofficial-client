@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link, PropTypes} from 'react-router';
-import {loadSuggest} from '../actions';
+import {loadSuggest, iAmFeelingLucky} from '../actions';
 import SearchInput from '../components/SearchInput';
 
 @connect(state => state)
@@ -24,6 +24,13 @@ export default class Header extends React.Component {
 					/>
 				</div>
 				<ul className="right">
+					<li>
+						<i
+							className="material-icons pointer rotate-on-hover"
+							children="casino"
+							onClick={e => dispatch(iAmFeelingLucky())}
+						/>
+					</li>
 					<li><Link to="/library">Playlists</Link></li>
 					<li><Link to="/radio">Radio</Link></li>
 				</ul>

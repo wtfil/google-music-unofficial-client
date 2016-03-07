@@ -67,6 +67,7 @@ export default function player(state = DEFAULT_PLAYER, action) {
 				screenQueue: action.data[0].tracks
 			};
 		case actions.SEARCH_SUCCESS:
+		case actions.FEELING_LUCKY:
 			return {
 				...state,
 				screenQueue: action.data.tracks

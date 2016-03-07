@@ -208,3 +208,19 @@ export function search(text) {
 		}
 	});
 }
+
+
+export const FEELING_LUCKY = 'FEELING_LUCKY';
+export function iAmFeelingLucky() {
+	return dispatch => request({
+		dispatch, pm,
+		url: 'services/radio/fetchradiofeed',
+		jsarray: true,
+		data: '[["",1],[null,[],null,null,false,[[5,""]],[],null,false]]',
+		types: {
+			success: FEELING_LUCKY
+		}
+	}).then(data => {
+		dispatch(selectTrack(data.tracks[0].trackId));
+	})
+}

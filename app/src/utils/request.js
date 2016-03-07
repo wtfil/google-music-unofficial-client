@@ -39,6 +39,10 @@ export default function request({pm, dispatch, extendAction, jsarray, url, metho
 
 
 const schemas = {
+	// lucky radio
+	8: {
+		0: 'tracks'
+	},
 	// search result
 	15: {
 		0: 'tracks',

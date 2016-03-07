@@ -74,6 +74,16 @@ nav ul {
 	cursor: pointer;
 }
 
+@keyframes rotate-animation {
+	0% {transform: rotate(0);}
+	50% {transform: rotate(15deg);}
+	100% {transform: rotate(-10deg);}
+}
+
+.rotate-on-hover:hover {
+	animation: rotate-animation 0.5s infinite;
+}
+
 .login-form {
 	padding: 20px;
 	width: 100%;
@@ -130,13 +140,8 @@ nav ul {
 		white-space: nowrap;
 		text-overflow: ellipsis;
 	}
-	@keyframes playing {
-		0% {transform: rotate(0);}
-		50% {transform: rotate(15deg);}
-		100% {transform: rotate(-10deg);}
-	}
 	&__note {
-		animation: playing 0.5s infinite;
+		animation: rotate-animation 0.5s infinite;
 	}
 }
 

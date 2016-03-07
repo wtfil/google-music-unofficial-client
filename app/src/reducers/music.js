@@ -33,6 +33,7 @@ export default function music(state = DEFAULT_MUSIC, action) {
 				albums: [...state.albums, action.data[0]]
 			};
 		case actions.SEARCH_SUCCESS:
+		case actions.FEELING_LUCKY:
 			return {
 				...state,
 				songs: [...state.songs, ...action.data.tracks]
