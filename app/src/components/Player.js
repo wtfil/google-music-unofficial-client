@@ -1,15 +1,13 @@
 import React from 'react';
 import classnames from 'classnames';
 import {connect} from 'react-redux';
-import {pausePlay, playNext, playPrev} from '../actions';
+import {setProgress, pausePlay, playNext, playPrev} from '../actions';
 
 class Audio extends React.Component {
 	componentWillMount(props) {
 		this.audio = new window.Audio();
 		this.onProgress = e => {
-			this.props.onProgress({
-				progress: this.audio.currentTime /this.audio.duration
-			});
+			this.props.onProgress(this.audio.currentTime /this.audio.duration);
 		};
 		this.onEnd = e => this.props.onEnd();
 		this.audio.addEventListener('timeupdate', this.onProgress);
@@ -48,25 +46,14 @@ class Audio extends React.Component {
 
 @connect(state => state)
 export default class Player extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			progress: 0
-		};
-	}
-
-	onProgress(e) {
-		this.setState(e);
-	}
 
 	setProgress(e) {
 		const progress = e.pageX / e.target.offsetWidth;
-		this.setState({progress});
+		this.props.dispatch(setProgress(progress));
 	}
 
 	render() {
 		const {music, player, dispatch} = this.props;
-		const {progress} = this.state;
 		let currentSong;
 		if (player.trackId) {
 			currentSong = music.songs.find(item => item.trackId === player.trackId);
@@ -74,12 +61,12 @@ export default class Player extends React.Component {
 		return <footer className="player">
 			<Audio
 				{...player}
-				progress={progress}
-				onProgress={::this.onProgress}
+				progress={player.progress}
+				onProgress={progress => dispatch(setProgress(progress))}
 				onEnd={e => dispatch(playNext())}
 			/>
 			<div onClick={::this.setProgress} className="player__progress pointer progress grey lighten-3">
-				<div className="determinate orange" style={{width: 100 * progress + '%'}}></div>
+				<div className="determinate orange" style={{width: 100 * player.progress + '%'}}></div>
 			</div>
 			<div className="player__content collection-item valign-wrapper">
 				<div className="player__left">

@@ -122,12 +122,17 @@ export function pausePlay() {
 	return {type: TRACK_PAUSE_PLAY};
 }
 
+export const SET_PROGRESS = 'SET_PROGRESS';
+export function setProgress(progress) {
+	return {type: SET_PROGRESS, progress};
+}
+
 export function playNext() {
 	return (dispatch, getState) => {
 		const {player} = getState();
 		const track = player.queue[player.queueIndex + 1];
 		if (track) {
-			playTrack(track.trackId)(dispatch, getState);
+			dispatch(playTrack(track.trackId));
 		} else {
 			dispatch({type: TRACK_PAUSE});
 		}
@@ -137,11 +142,11 @@ export function playNext() {
 export function playPrev() {
 	return (dispatch, getState) => {
 		const {player} = getState();
-		const track = (Date.now() - player.selectedAt < 2000 && player.queueIndex > 0) ?
-			player.queue[player.queueIndex - 1] :
-			player.queue[player.queueIndex];
-
-		playTrack(track.trackId)(dispatch, getState);
+		if (player.progress > 1 / 60 || player.queueIndex === 0) {
+			return dispatch(setProgress(0));
+		}
+		const track = player.queue[player.queueIndex - 1];
+		dispatch(playTrack(track.trackId));
 	}
 }
 

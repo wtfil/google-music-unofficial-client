@@ -1,5 +1,6 @@
 import * as actions from '../actions';
 const DEFAULT_PLAYER = {
+	progress: 0,
 	isPlaying: false,
 	queue: [],
 	screenQueue: [],
@@ -9,6 +10,11 @@ const DEFAULT_PLAYER = {
 
 export default function player(state = DEFAULT_PLAYER, action) {
 	switch (action.type) {
+		case actions.SET_PROGRESS:
+			return {
+				...state,
+				progress: action.progress
+			};
 		case actions.TRACK_PAUSE_PLAY:
 			return {
 				...state,
@@ -36,7 +42,6 @@ export default function player(state = DEFAULT_PLAYER, action) {
 			return {
 				...state,
 				isPlaying: true,
-				selectedAt: Date.now(),
 				trackId: action.trackId,
 				queueIndex
 			};
