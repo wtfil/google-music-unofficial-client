@@ -1,5 +1,23 @@
+@orange: #ff5722;
+@black: #212121;
+@gray-strong: #616161;
+@gray-medium: #7F7F7F;
+@gray-light: #E0E0E0;
+@gray-hover: #eeeeee;
+
+.orange-bg {
+	background: @orange;
+}
+.gray-light-gb {
+	background: @gray-light;
+}
+.gray-light-color {
+	color: @gray-light;
+}
+
 body {
 	height: 100%;
+	color: @black;
 }
 
 nav {
@@ -12,14 +30,20 @@ nav ul i.material-icons{
 	line-height: 64px;
 }
 
+h5 {
+	padding: 0 5px;
+}
+a {
+	color: @black;
+}
+
 .page {
 	position: absolute;
 	top: 64px;
-	padding: 0 10px;
 	z-index: -1;
 	bottom: 90px;
 	width: 100%;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .player {
@@ -32,6 +56,13 @@ nav ul i.material-icons{
 	border-top: 1px solid rgba(128, 128, 128, 0.2);
 	width: 100%;
 	margin: 0;
+	&__play {
+		width: 56px;
+		height: 56px;
+		line-height: 56px;
+		text-align: center;
+		font-size: 3rem;
+	}
 
 	&__content {
 		height: 100%;
@@ -40,6 +71,10 @@ nav ul i.material-icons{
 		margin: 0;
 		left: 0;
 		position: absolute;
+		background: white;
+	}
+	&__current {
+		height: 100%;
 	}
 	&__hover-item {
 		width: 80px;
@@ -97,7 +132,7 @@ nav ul i.material-icons{
 }
 .song-artist {
 	font-size: 13px;
-	color: #616161;
+	color: @gray-strong;
 }
 
 
@@ -137,28 +172,37 @@ nav ul i.material-icons{
 
 .playlist {
 	table-layout: fixed;
+	thead {
+		font-size: 12px;
+		font-weight: 600;
+		border: 0;
+	}
 	&__number {
 		min-width: 40px;
+		text-align: right;
+		padding-right: 15px;
 		width: 10%;
 	}
 	&__duration {
 		width: 10%;
+		color: @gray-strong;
+		text-align: right;
 	}
 	&__name {
 		width: 40%;
+		&.bold {
+			font-weight: 600;
+		}
 	}
 	&__artist {
 		width: 20%;
-	}
-	&__index {
-		padding: 0 5px;
 	}
 	&__icon {
 		display: none;
 	}
 	&__item.current,
 	&__item:hover {
-		background-color: #eceff1;
+		background-color: @gray-hover;
 	}
 	&__item:hover &__index {
 		display: none;
@@ -173,6 +217,7 @@ nav ul i.material-icons{
 	}
 	&__note {
 		animation: rotate-animation 0.5s infinite;
+		float: right;
 	}
 }
 

@@ -9,12 +9,17 @@ export default class Header extends React.Component {
 	static contextTypes = {
 		history: PropTypes.history
 	};
+
+	shouldComponentUpdate(props) {
+		return props.search !== this.props.search;
+	}
+
 	render() {
 		const {dispatch, search} = this.props
 		const {history} = this.context;
 		const suggest = search.suggests.find(suggest => suggest.text === search.text);
 		return <nav>
-			<div className="nav-wrapper orange">
+			<div className="nav-wrapper orange-bg">
 				<div className="left hide-on-small-only">
 					<SearchInput
 						value={search.text}

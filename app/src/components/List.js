@@ -1,5 +1,5 @@
 import React from 'react';
-import classnames from 'classnames';
+import cx from 'classnames';
 import {Link} from 'react-router';
 import formatTime from '../utils/formatTime';
 
@@ -8,12 +8,12 @@ class Item extends React.Component {
 		const {small, current, album, albumId, artist, title, duration, trackId, onSelect, artistId, index} = this.props;
 		const isCurrent = current === trackId;
 
-		return <tr className={classnames('playlist__item song-title', {current: isCurrent} )}>
+		return <tr className={cx('playlist__item song-title', {current: isCurrent} )}>
 			{isCurrent ?
 				<td>
-					<i className="material-icons tiny playlist__note">music_note</i>
+					<i className="playlist__number material-icons tiny playlist__note">music_note</i>
 				</td> :
-				<td className="playlist__number valign-wrapper">
+				<td className="playlist__number">
 					<span className="playlist__index">{index + 1}</span>
 					<i
 						onClick={e => onSelect(trackId)}
@@ -22,8 +22,8 @@ class Item extends React.Component {
 					/>
 				</td>
 			}
-			<td className="playlist__name">{title}</td>
-			{!small && <td className="playlist__duration grey-text hide-on-small-only">{formatTime(duration)}</td>}
+			<td className={cx("playlist__name", {bold: isCurrent})}>{title}</td>
+			{!small && <td className="playlist__duration hide-on-small-only">{formatTime(duration)}</td>}
 			<td className="playlist__artist">
 				<Link to={'artists/' + artistId}>{artist}</Link>
 			</td>
@@ -35,6 +35,11 @@ class Item extends React.Component {
 }
 
 export default class List extends React.Component {
+	shouldComponentUpdate(props) {
+		return props.items !== this.props.items ||
+			props.current !== this.props.current
+	}
+
 	render() {
 		const {items, ...props} = this.props;
 		return <table className="playlist">

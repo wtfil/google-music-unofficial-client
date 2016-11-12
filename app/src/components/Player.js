@@ -1,49 +1,9 @@
 import React from 'react';
-import classnames from 'classnames';
+import cx from 'classnames';
 import {connect} from 'react-redux';
 import {setProgress, pausePlay, playNext, playPrev, selectTrack} from '../actions';
-import List from '../components/List';
-
-class Audio extends React.Component {
-	componentWillMount(props) {
-		this.audio = new window.Audio();
-		this.onProgress = e => {
-			this.props.onProgress(this.audio.currentTime /this.audio.duration);
-		};
-		this.onEnd = e => this.props.onEnd();
-		this.audio.addEventListener('timeupdate', this.onProgress);
-		this.audio.addEventListener('ended', this.onEnd);
-		this.onProps(this.props);
-	}
-	componentWillUnmount() {
-		this.audio.pause();
-		this.audio.removeEventListener('timeupdate', this.onProgress);
-		this.audio.removeEventListener('ended', this.onEnd);
-		delete this.audio;
-	}
-	componentWillReceiveProps(props) {
-		this.onProps(props);
-	}
-	onProps(props) {
-		if (props.isPlaying) {
-			if (props.streamUrl && this.audio.src !== props.streamUrl) {
-				this.audio.src = props.streamUrl;
-			}
-			const position = props.progress * this.audio.duration;
-			if (Math.abs(position - this.audio.currentTime) > 1) {
-				this.audio.currentTime = position;
-			}
-			if (this.audio.currentTime !== this.audio.duration) {
-				this.audio.play();
-			}
-		} else {
-			this.audio.pause();
-		}
-	}
-	render() {
-		return null;
-	}
-}
+import List from './List';
+import Audio from './Audio';
 
 @connect(state => state)
 export default class Player extends React.Component {
@@ -76,8 +36,8 @@ export default class Player extends React.Component {
 				onProgress={progress => dispatch(setProgress(progress))}
 				onEnd={e => dispatch(playNext())}
 			/>
-			<div onClick={::this.setProgress} className="player__progress pointer progress grey lighten-3">
-				<div className="determinate orange" style={{width: 100 * player.progress + '%'}}></div>
+			<div onClick={::this.setProgress} className="player__progress pointer progress">
+				<div className="player__current orange-bg" style={{width: 100 * player.progress + '%'}}></div>
 			</div>
 			{showQueue &&
 				<div className="player__queue z-depth-2">
@@ -106,17 +66,17 @@ export default class Player extends React.Component {
 				</div>
 				<div className="valign-wrapper">
 					<i
-						className="material-icons left pointer"
+						className={cx("material-icons left pointer", {'gray-light-color': !currentSong})}
 						children="skip_previous"
 						onClick={e => dispatch(playPrev())}
 					/>
 					<i
-						className={classnames('material-icons circle white-text medium', {'orange pointer': currentSong}, {'grey': !currentSong})}
+						className={cx('player__play material-icons circle white-text', {'orange-bg pointer': currentSong}, {'gray-light-gb': !currentSong})}
 						children={player.isPlaying ? 'pause' : 'play_arrow'}
 						onClick={e => dispatch(pausePlay())}
 					/>
 					<i
-						className="material-icons right pointer"
+						className={cx("material-icons right pointer", {'gray-light-color': !currentSong})}
 						children="skip_next"
 						onClick={e => dispatch(playNext())}
 					/>
