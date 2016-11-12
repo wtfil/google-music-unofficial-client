@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron main.js",
     "dev": "electron main.js & webpack-dev-server",
-    "build": "./bin/build.sh"
+    "build": "bash ./bin/build.sh"
   },
   "keywords": [
     "Electron",

@@ -3,7 +3,7 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-const isProd = /\.app/.test(__filename);
+const isProd = /app/.test(__filename);
 
 let mainWindow;
 
