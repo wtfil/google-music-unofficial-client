@@ -1,7 +1,8 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-	context: __dirname + '/app',
+	context: path.join(__dirname, '/app'),
 	entry: './src/index.js',
 	output: {
 	    path: './app/build',
@@ -23,6 +24,7 @@ module.exports = {
 		]
 	},
 	plugins: [
+		new webpack.OldWatchingPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin()
 	],
