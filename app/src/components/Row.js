@@ -5,40 +5,49 @@ class Card extends React.Component {
 	render() {
 		const props = this.props;
 		const name = props.nameField ? props[props.nameField]: props.name;
-		const images = props.imageField ? props[props.imageField] : props.image;
-		const image = Array.isArray(images) ? images[0] : images;
+		let images = props.imageField ? props[props.imageField] : props.image;
+		if (Array.isArray(images)) {
+			images = images.slice();
+			while (images.length < 4) {
+				images.push(images[0]);
+			}
+		}
 
-		return <div className="grid__item">
-			<div className="card hoverable">
-				<div className="card-image">
-					{image ?
-						<img width={208} height={208} src={image} /> :
-						null
+		return <Link className="grid__item hoverable " to={props.basePath + '/' + props.id}>
+			<div className="grid__card">
+				<div className='grid__images'>
+					{images && Array.isArray(images) &&
+						images.map((image, index) =>
+							<div
+								className='grid__image compact'
+								key={index}
+								style={{backgroundImage: `url(${image})` }}
+							/>
+						)
+					}
+					{images && !Array.isArray(images) &&
+						<img className='grid__image' src={images} />
 					}
 				</div>
-				<div className="card-content">
-					<div><Link className="black-text" to={props.basePath + '/' + props.id}>
-						{name}
-						{props.year && ` - ${props.year}`}
-					</Link></div>
+				<div className="grid__text">
+					{name}
+					{props.year && ` - ${props.year}`}
 				</div>
 			</div>
-		</div>;
+		</Link>;
 	}
 }
 export default class Row extends React.Component {
 	render() {
 		const {items, ...props} = this.props;
 		return <div className="grid">
-			<div className="grid__content">
-				{items.map((item, index) => {
-					return <Card
-						key={index}
-						{...props}
-						{...item}
-					/>
-				})}
-			</div>
+			{items.map((item, index) => {
+				return <Card
+					key={index}
+					{...props}
+					{...item}
+				/>
+			})}
 		</div>;
 	}
 }

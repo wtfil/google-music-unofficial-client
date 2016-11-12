@@ -1,5 +1,5 @@
 function sprintf2(n) {
-	return n > 10 ? n : ('0' + n);
+	return n >= 10 ? n : ('0' + n);
 }
 export default function formatTime(ms) {
 	let s = ms / 1000;

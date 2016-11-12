@@ -31,7 +31,7 @@ nav ul i.material-icons{
 }
 
 h5 {
-	padding: 0 5px;
+	padding: 0 8px;
 }
 a {
 	color: @black;
@@ -157,16 +157,42 @@ a {
 
 .grid {
 	position: relative;
-	&__content {
-		margin-left: -5px;
-		margin-right: -5px;
-		display: flex;
-		justify-content: space-around;
-		flex-wrap: wrap;
-	}
+	overflow: hidden;
 	&__item {
-		margin: 0 5px 10px 5px;
-		width: 208px;
+		box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
+		float: left;
+		margin: 0 8px 16px 8px;
+		width: ~"calc(25% - 16px)";
+		@media (max-width: 790px) {
+			width: ~"calc(100%/3 - 16px)";
+		}
+		@media (max-width: 500px) {
+			width: ~"calc(50% - 16px)";
+		}
+		@media (max-width: 250px) {
+			width: ~"calc(100% - 16px)";
+		}
+	}
+	&__images {
+		overflow: hidden;
+	}
+	&__image {
+		width: 100%;
+		float: left;
+		&.compact {
+			width: 50%;
+			padding-top: 50%;
+			background-size: cover;
+		}
+	}
+	&__card {
+		margin: 0;
+	}
+	&__text {
+		padding: 16px;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
 	}
 }
 

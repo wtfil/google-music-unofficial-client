@@ -61,7 +61,7 @@ const schemas = {
 		11: 'topSongs'
 	},
 	// album
-	23: {
+	24: {
 		1: 'name',
 		2: 'artist',
 		3: 'image',

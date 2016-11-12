@@ -20,6 +20,7 @@ render(
 	<Provider store={store}>
 		<Router
 			history={createHashHistory()}
+			onUpdate={() => window.scrollTo(0, 0)}
 			routes={routes}
 		/>
 	</Provider>,
