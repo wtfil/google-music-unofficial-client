@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {loadPlaylist, selectTrack} from '../actions';
 import List from '../components/List';
+import Info from '../components/Info';
 
 @connect(state => state)
 export default class Library extends React.Component {
@@ -12,7 +13,12 @@ export default class Library extends React.Component {
 		const {dispatch, player, params: {id}} = this.props;
 		const playlist = this.props.music.playlists.find(p => p.id === id && p.tracks);
 		return <div>
-			<h5>Playlist</h5>
+			<Info
+				title={playlist.title}
+				tracks={playlist.tracks}
+				subTitle='My playlist'
+				image={playlist.suggestedPlaylistArtUrl[0]}
+			/>
 			<List
 				current={player.trackId}
 				items={playlist.tracks}

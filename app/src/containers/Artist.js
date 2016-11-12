@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {loadArtist, selectTrack} from '../actions';
 import Row from '../components/Row';
 import List from '../components/List';
+import Info from '../components/Info';
 
 @connect(state => state)
 export default class Artist extends React.Component {
@@ -12,13 +13,14 @@ export default class Artist extends React.Component {
 	render() {
 		const {dispatch, music, player, params: {id}} = this.props;
 		const artist = music.artists.find(item => item.id === id);
+
 		return <div>
-			<div className="card">
-				<div className="card-image preview">
-					<img src={artist.image} />
-					<span className="card-title">{artist.name}</span>
-				</div>
-			</div>
+			<Info
+				title={artist.name}
+				image={artist.image}
+				tracks={artist.topSongs}
+				description={artist.description}
+			/>
 			<div>
 				<h5>Albums</h5>
 				<Row

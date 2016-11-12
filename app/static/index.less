@@ -268,3 +268,39 @@ a {
 		}
 	}
 }
+
+
+.info {
+	display: flex;
+	flex-direction: row;
+	&__image {
+		width: 264px;
+		height: 264px;
+	}
+	&__content {
+		margin-left: 20px;
+		display: flex;
+		flex-direction: column;
+	}
+	&__title {
+		font-size: 28px;
+	}
+	&__attrs {
+		margin-top: 4px;
+		font-weight: 400;
+		font-size: 13px;
+		color: @gray-medium;
+	}
+	&__sub-title {
+		font-size: 15px;
+	}
+
+	&__description {
+		max-height: 44px;
+		overflow: hidden;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		display: -webkit-box;
+	}
+
+}

@@ -81,17 +81,19 @@ export function loadPlaylists() {
 export const LOAD_PLAYLIST_SUCCESS = 'LOAD_PLAYLIST_SUCCESS';
 export const LOAD_PLAYLIST_UNSUCCESS = 'LOAD_PLAYLIST_UNSUCCESS';
 export function loadPlaylist(id) {
-	return dispatch => request({
-		dispatch, pm,
-		url: 'services/loaduserplaylist',
-		jsarray: true,
-		data: `[['', 1], [${id}]]`,
-		extendAction: {id},
-		types: {
-			error: LOAD_PLAYLIST_UNSUCCESS,
-			success: LOAD_PLAYLIST_SUCCESS
-		}
-	});
+	return dispatch => dispatch(loadPlaylists()).then(() => {
+		return request({
+			dispatch, pm,
+			url: 'services/loaduserplaylist',
+			jsarray: true,
+			data: `[['', 1], [${id}]]`,
+			extendAction: {id},
+			types: {
+				error: LOAD_PLAYLIST_UNSUCCESS,
+				success: LOAD_PLAYLIST_SUCCESS
+			}
+		});
+	})
 }
 
 export const TRACK_PLAYING = 'TRACK_PLAYING';

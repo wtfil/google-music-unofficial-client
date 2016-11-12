@@ -3,7 +3,10 @@ function sprintf2(n) {
 }
 export default function formatTime(ms) {
 	let s = ms / 1000;
-	const m = Math.floor(s / 60);
+	let m = Math.floor(s / 60);
+	const h = Math.floor(m / 60);
 	s -= m * 60;
-	return `${sprintf2(m)}:${sprintf2(s)}`;
+	m -= h * 60;
+	const suffix = `${sprintf2(m)}:${sprintf2(s)}`;
+	return h ? (h + ':' + suffix) : suffix;
 }

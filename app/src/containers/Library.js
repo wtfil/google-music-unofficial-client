@@ -13,7 +13,7 @@ export default class Library extends React.Component {
 		return <div>
 			<h5>My Playlists</h5>
 			<Row
-				items={music.userPlaylists}
+				items={music.playlists}
 				imageField="suggestedPlaylistArtUrl"
 				nameField="title"
 				basePath="playlists"

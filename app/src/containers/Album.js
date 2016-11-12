@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import {loadAlbum, selectTrack} from '../actions';
 import Row from '../components/Row';
 import List from '../components/List';
+import Info from '../components/Info';
 
 @connect(state => state)
 export default class Artist extends React.Component {
@@ -15,13 +16,14 @@ export default class Artist extends React.Component {
 		const album = music.albums.find(item => item.id == id);
 
 		return <div>
-			<div className="card">
-				<div className="card-image preview">
-					<img src={album.image} />
-					<span className="card-title">{album.name}</span>
-				</div>
-			</div>
-			<h5><Link to={'artists/' + album.artistId}>{album.artist}</Link> - {album.name} ({album.year})</h5>
+			<Info
+				title={album.name}
+				subTitle={album.artist}
+				image={album.image}
+				tracks={album.tracks}
+				year={album.year}
+				description={album.description}
+			/>
 			<List
 				current={player.trackId}
 				items={album.tracks}
