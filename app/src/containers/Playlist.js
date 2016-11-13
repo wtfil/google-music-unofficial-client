@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {loadPlaylist, selectTrack} from '../actions';
+import {loadPlaylist, selectTrack, uploadToFolder} from '../actions';
 import List from '../components/List';
 import Info from '../components/Info';
 
@@ -18,6 +18,7 @@ export default class Library extends React.Component {
 				tracks={playlist.tracks}
 				subTitle='My playlist'
 				image={playlist.suggestedPlaylistArtUrl[0]}
+				onLoad={() => dispatch(uploadToFolder(playlist.title, playlist.tracks))}
 			/>
 			<List
 				current={player.trackId}

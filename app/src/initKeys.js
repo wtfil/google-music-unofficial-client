@@ -1,5 +1,5 @@
 import {pausePlay, playNext, playPrev} from './actions';
-const {ipcRenderer} = electron;
+const {ipcRenderer} = native.electron;
 
 export default function initKeys({dispatch}) {
 	ipcRenderer.on('key', (e, data) => {

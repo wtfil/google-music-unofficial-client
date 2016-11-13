@@ -1,5 +1,7 @@
 import request from './utils/request';
-const pm = new Playmusic();
+import download from './utils/download';
+const pm = new native.Playmusic();
+const {dialog} = native.electron.remote;
 
 function set(key, val) {
 	localStorage.setItem(key, JSON.stringify(val));
@@ -225,4 +227,10 @@ export function iAmFeelingLucky() {
 	}).then(data => {
 		dispatch(selectTrack(data.tracks[0].trackId));
 	})
+}
+
+export const uploadToFolder = (name, tracks) => dispatch => {
+	const [folder] = dialog.showOpenDialog({properties: ['openDirectory']})
+	const dst = native.path.join(folder, name);
+	download(pm, dst, tracks);
 }

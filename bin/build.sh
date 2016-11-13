@@ -13,14 +13,14 @@ fi
 
 webpack
 electron-packager . GoogleMusic \
-    --platform=$PLATFORM --arch=x64 --version=0.35.6 --ignore=$IGNORE --icon=$ICON --overwrite
+    --platform=$PLATFORM --arch=x64 --version=1.4.6 --ignore=$IGNORE --icon=$ICON --overwrite
 
 if [[ $IS_MAC ]]; then
     cd GoogleMusic-darwin-x64
     tar -zcvf GoogleMusic.app.tar.gz GoogleMusic.app
 else
     mkdir GoogleMusic
-    cp -r GoogleMusic-win32-x64/{content_shell.pak,GoogleMusic.exe,icudtl.dat,locales,natives_blob.bin,node.dll,resources,ui_resources_200_percent.pak,version} GoogleMusic
+    cp -r GoogleMusic-win32-x64/{ffmpeg.dll,content_shell.pak,GoogleMusic.exe,icudtl.dat,locales,natives_blob.bin,node.dll,resources,ui_resources_200_percent.pak,version} GoogleMusic
     powershell "Add-Type -A System.IO.Compression.FileSystem;    [IO.Compression.ZipFile]::CreateFromDirectory('GoogleMusic', 'GoogleMusic.zip')"
-    rm -rf GoogleMusic GoogleMusic-win32-x64
+    rm -rf GoogleMusic-win32-x64
 fi
