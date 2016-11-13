@@ -1,6 +1,4 @@
 node_modules
 npm-debug*
 app/build
-GoogleMusic-darwin-x64
-GoogleMusic-win32-x64
-
+GoogleMusic*
