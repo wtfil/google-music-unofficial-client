@@ -36,15 +36,17 @@ export function authorize() {
 }
 
 export function login(opts) {
-	return dispatch => {
-		pm.login(opts, (err, data) => {
-			if (err) {
-				return dispatch({type: LOGIN_UNSUCCESS, message: 'Wrong email or password'});
-			}
-			set('google-auth', data);
-			authorize();
-		});
-	}
+	return dispatch =>
+		new Promise((resolve, reject) => {
+			pm.login(opts, (err, data) => {
+				if (err) {
+					dispatch({type: LOGIN_UNSUCCESS, message: 'Wrong email or password'});
+					return reject(err);
+				}
+				set('google-auth', data);
+				resolve();
+			});
+		}).then(() => dispatch(authorize()))
 }
 
 export const LOAD_RADIO_SUCCESS = 'LOAD_RADIO_SUCCESS';

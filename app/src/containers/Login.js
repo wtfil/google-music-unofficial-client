@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {login} from '../actions';
 
 @connect(state => state)
 export default class Login extends React.Component {
+
+	static contextTypes = {
+		history: PropTypes.object.isRequired
+	};
+
 	render() {
 		const {profile} = this.props;
 		return <div className="parallax valign-wrapper">
@@ -31,6 +36,9 @@ export default class Login extends React.Component {
 		const email = this.refs.email.value;
 		const password = this.refs.password.value;
 		this.props.dispatch(login({email, password}))
+			.then(() => {
+				this.context.history.pushState(null, '/');
+			});
 	}
 }
 

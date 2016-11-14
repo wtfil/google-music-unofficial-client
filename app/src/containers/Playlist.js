@@ -12,6 +12,9 @@ export default class Library extends React.Component {
 	render() {
 		const {dispatch, player, params: {id}} = this.props;
 		const playlist = this.props.music.playlists.find(p => p.id === id && p.tracks);
+		if (!playlist) {
+			return null;
+		}
 		return <div>
 			<Info
 				title={playlist.title}

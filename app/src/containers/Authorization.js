@@ -5,10 +5,6 @@ import Login from './Login'
 
 @connect(state => state)
 export default class Authorization  extends React.Component {
-	static contextTypes = {
-		history: PropTypes.object.isRequired
-	};
-
 	static onEnter(dispatch) {
 		return dispatch(authorize());
 	}
