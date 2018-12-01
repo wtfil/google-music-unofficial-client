@@ -6,9 +6,9 @@
 You can download build for [Mac](https://github.com/wtfil/google-music-unofficial-client/releases/download/v1.0.0/GoogleMusic.app.tar.gz) or [Windows](https://github.com/wtfil/google-music-unofficial-client/releases/download/v1.1.0/GoogleMusic.zip) (windows is newer)
 ## Development
 
-npm install
-npm run dev
+    npm install
+    npm run dev
 
 ## Build
-npm run build
-open GoogleMusic-darwin-x64
+    npm run build
+    open GoogleMusic-darwin-x64
